@@ -45,16 +45,15 @@
   </div>
 
   <script>
-
-const button = document.getElementById('button'); // The "YES" button (Runs away)
-const secondBtn = document.getElementById('second'); // The "NO" button (Triggers surprise)
+const button = document.getElementById('button'); // The "YES" button
+const secondBtn = document.getElementById('second'); // The "NO" button
 const contentWrapper = document.getElementById('content-wrapper');
 const teddyContainer = document.getElementById('teddy-container');
 const petalContainer = document.getElementById('petal-container');
 const letterModal = document.getElementById('letter-modal');
 const finalRose = document.getElementById('final-rose');
 
-// 1. "YES" button runs away when she tries to click it
+// 1. "YES" button runs away when the mouse gets close
 document.addEventListener('mousemove', (event) => {
     const buttonRect = button.getBoundingClientRect();
     const distX = event.clientX - (buttonRect.left + buttonRect.width / 2);
@@ -66,7 +65,6 @@ document.addEventListener('mousemove', (event) => {
         let newX = button.offsetLeft - Math.cos(angle) * 150;
         let newY = button.offsetTop - Math.sin(angle) * 150;
 
-        // Boundary checks to keep it on screen
         newX = Math.max(20, Math.min(window.innerWidth - buttonRect.width - 20, newX));
         newY = Math.max(20, Math.min(window.innerHeight - buttonRect.height - 20, newY));
 
@@ -76,27 +74,32 @@ document.addEventListener('mousemove', (event) => {
     }
 });
 
-// 2. Click "NO, I'M NOT ANGRY" to start the romance
+// NEW: 2. "YES" button disappears if it is actually clicked
+button.addEventListener('click', () => {
+    button.style.display = 'none';
+});
+
+// 3. Click "NO" to start the romance
 secondBtn.addEventListener('click', function() {
     contentWrapper.style.display = 'none';
     teddyContainer.style.display = 'block';
     startPetalShower();
 });
 
-// 3. High Quantity Fast Petal Shower
+// 4. High Quantity Fast Petal Shower
 function startPetalShower() {
     setInterval(() => {
         const petal = document.createElement('div');
         petal.classList.add('petal');
         petal.style.left = Math.random() * window.innerWidth + 'px';
-        const duration = Math.random() * 2 + 1.5; // Faster fall
+        const duration = Math.random() * 2 + 1.5;
         petal.style.animationDuration = duration + 's';
         petalContainer.appendChild(petal);
         setTimeout(() => petal.remove(), duration * 1000);
-    }, 80); // Higher quantity
+    }, 80);
 }
 
-// 4. Sequence Logic
+// 5. Sequence Logic
 teddyContainer.addEventListener('click', () => {
     letterModal.style.display = 'block';
 });
@@ -106,7 +109,6 @@ document.getElementById('close-letter').addEventListener('click', () => {
     teddyContainer.style.display = 'none';
     finalRose.style.display = 'block';
 });
-
   </script>
 </body>
 </html>
