@@ -1,0 +1,79 @@
+body {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url("top-view-lots-pink-hearts.jpg");
+    background-size: cover; 
+    background-position: center; 
+    height: 100vh;
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+#button, #second {
+    padding: 15px 35px;
+    font-size: 22px;
+    position: fixed;
+    cursor: pointer;
+    border-radius: 50px;
+    border: 3px solid #ffb7b7;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+/* Position buttons */
+#button { left: 55%; top: 60%; background-color: #eee; } /* The runaway button */
+#second { left: 35%; top: 60%; background-color: #ffb7b7; animation: heartbeat 1.5s infinite; }
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+h1 {
+    color: #333;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+#teddy-container, #final-rose {
+    display: none;
+    position: absolute;
+    text-align: center;
+    z-index: 1001;
+}
+
+#letter-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fffafa;
+    padding: 30px;
+    border: 3px solid #ff69b4;
+    border-radius: 25px;
+    z-index: 2000;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 0 50px rgba(255, 105, 180, 0.3);
+}
+
+.petal {
+    position: fixed;
+    top: -50px;
+    z-index: 999;
+    width: 35px;
+    height: 35px;
+    background-image: url('rosepeddle.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh) rotate(540deg); }
+}

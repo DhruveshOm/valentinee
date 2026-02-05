@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css"> 
+  <title>I'm So Sorry... 🥺</title>
+</head>
+<body id="body">
+  <div id="content-wrapper" style="text-align: center; z-index: 10;">
+    <img src="Forgive Me Crying GIF by Sappy Seals.gif" alt="Crying Dudu" style="width: 200px; margin-bottom: 20px; border-radius: 55px;">
+    
+    <h1 id="main-title" style="border: none; background: none; font-size: 28px;">
+        I'm really sorry for what I said... 🥺<br>
+        Are you still angry at me?
+    </h1>
+  
+    <div class="btn-group" style="margin-top: 50px;">
+        <button id="second" style="position: relative; left: 0; top: 0; margin-right: 40px; background-color: #ffb7b7;">NO 😊</button>
+        <button id="button" style="position: relative; left: 0; top: 0;">YES 😒</button>
+    </div>
+  </div>
+
+  <div id="petal-container"></div>
+
+  <div id="teddy-container" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; cursor: pointer; z-index: 1001;">
+    <img src="loveLetter.png" id="teddy-img" style="width: 300px;">
+    <p style="font-family: cursive; color: #d11d53;">(Please open this? 🥺)</p>
+  </div>
+
+  <div id="letter-modal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff0f5; padding: 30px; border: 2px solid #ff69b4; border-radius: 15px; z-index: 2000; box-shadow: 0 0 20px rgba(0,0,0,0.2); text-align: center; width: 300px;">
+    <h2 style="color: #d11d53;">To My Beautiful Girl...</h2>
+    <p>"My Dearest,
+<b>I know the miles between us feel heavy right now, but please never doubt that you are the only one who holds my heart. Every single day, everything I do—every late night and every bit of hard work—is fueled by the thought of our future together. I’m building a life that I can’t wait to share with you.</b>
+
+<b>Please don't be angry anymore. My heart aches when we aren't okay, and I’d do anything just to see you smile again. You are my greatest motivation and my favorite person in the world. I am counting down the days until there is no more distance between us.</b>
+
+<b>I love you more than words can say. ❤️</b>"</p>
+    <button id="close-letter" style="padding: 10px 20px; cursor: pointer; background: #ff69b4; color: white; border: none; border-radius: 5px;">I Forgive You ❤️</button>
+  </div>
+
+  <div id="final-rose" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 1001;">
+    <img src="Rose.png" style="width: 400px;">
+    <h1 style="color: #8b0000; border: none; background: none; margin-top: 20px;">BE MY VALENTINE? ❤️</h1>
+  </div>
+
+  <script>
+
+const button = document.getElementById('button'); // The "YES" button (Runs away)
+const secondBtn = document.getElementById('second'); // The "NO" button (Triggers surprise)
+const contentWrapper = document.getElementById('content-wrapper');
+const teddyContainer = document.getElementById('teddy-container');
+const petalContainer = document.getElementById('petal-container');
+const letterModal = document.getElementById('letter-modal');
+const finalRose = document.getElementById('final-rose');
+
+// 1. "YES" button runs away when she tries to click it
+document.addEventListener('mousemove', (event) => {
+    const buttonRect = button.getBoundingClientRect();
+    const distX = event.clientX - (buttonRect.left + buttonRect.width / 2);
+    const distY = event.clientY - (buttonRect.top + buttonRect.height / 2);
+    const distance = Math.sqrt(distX * distX + distY * distY);
+
+    if (distance < 150) {
+        const angle = Math.atan2(distY, distX);
+        let newX = button.offsetLeft - Math.cos(angle) * 150;
+        let newY = button.offsetTop - Math.sin(angle) * 150;
+
+        // Boundary checks to keep it on screen
+        newX = Math.max(20, Math.min(window.innerWidth - buttonRect.width - 20, newX));
+        newY = Math.max(20, Math.min(window.innerHeight - buttonRect.height - 20, newY));
+
+        button.style.position = 'fixed';
+        button.style.left = newX + 'px';
+        button.style.top = newY + 'px';
+    }
+});
+
+// 2. Click "NO, I'M NOT ANGRY" to start the romance
+secondBtn.addEventListener('click', function() {
+    contentWrapper.style.display = 'none';
+    teddyContainer.style.display = 'block';
+    startPetalShower();
+});
+
+// 3. High Quantity Fast Petal Shower
+function startPetalShower() {
+    setInterval(() => {
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+        petal.style.left = Math.random() * window.innerWidth + 'px';
+        const duration = Math.random() * 2 + 1.5; // Faster fall
+        petal.style.animationDuration = duration + 's';
+        petalContainer.appendChild(petal);
+        setTimeout(() => petal.remove(), duration * 1000);
+    }, 80); // Higher quantity
+}
+
+// 4. Sequence Logic
+teddyContainer.addEventListener('click', () => {
+    letterModal.style.display = 'block';
+});
+
+document.getElementById('close-letter').addEventListener('click', () => {
+    letterModal.style.display = 'none';
+    teddyContainer.style.display = 'none';
+    finalRose.style.display = 'block';
+});
+
+  </script>
+</body>
+</html>
