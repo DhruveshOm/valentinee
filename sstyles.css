@@ -1,79 +1,115 @@
 body {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url("top-view-lots-pink-hearts.jpg");
+    background-image: url("top-view-lots-pink-hearts.jpg");
     background-size: cover; 
     background-position: center; 
+    background-repeat: no-repeat; 
+    margin: 0; 
     height: 100vh;
     overflow: hidden; 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: 'Comic Sans MS', cursive;
+    font-family: cursive;
 }
 
 #button, #second {
-    padding: 15px 35px;
-    font-size: 22px;
+    padding: 20px 40px;
+    font-size: 25px;
     position: fixed;
     cursor: pointer;
-    border-radius: 50px;
+    background-color: #f8cdcde1;
+    border-radius: 100px;
     border: 3px solid #ffb7b7;
     z-index: 10;
-    transition: all 0.3s ease;
+    transition: transform 0.2s;
 }
 
-/* Position buttons */
-#button { left: 55%; top: 60%; background-color: #eee; } /* The runaway button */
-#second { left: 35%; top: 60%; background-color: #ffb7b7; animation: heartbeat 1.5s infinite; }
+/* Position them initially */
+#button { left: 60%; top: 50%; }
+#second { left: 30%; top: 50%; }
 
-@keyframes heartbeat {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+/* Romantic Pulse for the YES button */
+#second {
+    animation: pulse 1.5s infinite;
+    background-color: #ffb7b7;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 183, 183, 0.7); }
+    70% { transform: scale(1.1); box-shadow: 0 0 0 20px rgba(255, 183, 183, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 183, 183, 0); }
 }
 
 h1 {
-    color: #333;
-    background: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    text-transform: uppercase;
+    color: rgb(11, 6, 6);
+    border: 2px rgb(229, 160, 160) solid;
     padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
 }
 
+/* Fade-in for Teddy and Rose */
 #teddy-container, #final-rose {
     display: none;
     position: absolute;
     text-align: center;
+    animation: fadeIn 2s;
     z-index: 1001;
 }
 
+#teddy-img { width: 300px; cursor: pointer; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -45%); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+/* Modal Styling */
 #letter-modal {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #fffafa;
+    background: #fff0f5;
     padding: 30px;
     border: 3px solid #ff69b4;
-    border-radius: 25px;
+    border-radius: 15px;
     z-index: 2000;
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.4);
     text-align: center;
     width: 320px;
-    box-shadow: 0 0 50px rgba(255, 105, 180, 0.3);
 }
 
+#close-letter {
+    padding: 10px 20px;
+    background: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Petal Styling */
+/* Change the animation duration in the .petal class */
 .petal {
     position: fixed;
     top: -50px;
     z-index: 999;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     background-image: url('rosepeddle.png');
     background-size: contain;
     background-repeat: no-repeat;
+    /* Reduced duration from 4s-7s down to 2s-4s for speed */
     animation: fall linear infinite;
 }
 
 @keyframes fall {
-    to { transform: translateY(110vh) rotate(540deg); }
+    to { 
+        transform: translateY(110vh) rotate(540deg); /* Added more rotation for a "windy" effect */
+    }
 }
